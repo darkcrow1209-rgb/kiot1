@@ -1,0 +1,33 @@
+{
+  "name": "quan-ly-kiosk-standalone",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "bun run build:client",
+    "build:client": "bun ./client/build.mjs && bun x @tailwindcss/cli -i ./client/src/theme.css -o ./client/dist/theme.css --minify",
+    "dev": "bun run build:client && wrangler dev",
+    "deploy": "bun run build:client && wrangler deploy",
+    "db:migrate:local": "wrangler d1 migrations apply kiosk-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply kiosk-db --remote",
+    "db:seed:local": "wrangler d1 execute kiosk-db --local --file=seed.sql",
+    "db:seed:remote": "wrangler d1 execute kiosk-db --remote --file=seed.sql"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "5.100.10",
+    "drizzle-orm": "0.45.2",
+    "react": "19.2.5",
+    "react-dom": "19.2.5",
+    "recharts": "2.15.3",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250101.0",
+    "@tailwindcss/cli": "4.1.13",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "tailwindcss": "4.1.13",
+    "tailwindcss-safe-area": "1.3.0",
+    "typescript": "5.6.3",
+    "wrangler": "^4.0.0"
+  }
+}

@@ -1,0 +1,30 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "quan-ly-kiosk",
+	"main": "server/src/index.ts",
+	"compatibility_date": "2025-10-01",
+	"assets": {
+		"directory": "./client/dist",
+		"binding": "ASSETS",
+		"not_found_handling": "single-page-application",
+		// true: mọi request đi qua Worker trước (để kiểm tra mật khẩu nếu có đặt APP_PASSWORD)
+		"run_worker_first": true
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "kiosk-db",
+			"database_id": "399ad733-139d-48c3-ac7d-134e3b4c2928",
+			"migrations_dir": "drizzle"
+		},
+		{
+			"binding": "kiosk_db",
+			"database_name": "kiosk-db",
+			"database_id": "399ad733-139d-48c3-ac7d-134e3b4c2928",
+			"remote": true
+		}
+	],
+	"observability": {
+		"enabled": true
+	}
+}
