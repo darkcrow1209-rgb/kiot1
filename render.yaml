@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: quan-ly-kiosk
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    # Disk giữ database SQLite không bị mất khi deploy lại (cần gói trả phí của Render).
+    # Nếu dùng gói miễn phí, hãy bỏ block disk bên dưới — dữ liệu sẽ reset mỗi lần deploy.
+    disk:
+      name: kiosk-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: DATA_DIR
+        value: /data
+      - key: PORT
+        value: 3000
